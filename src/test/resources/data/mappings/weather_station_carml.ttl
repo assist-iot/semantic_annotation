@@ -1,0 +1,1476 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix map: <http://mapping.example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix v: <http://rdf.data-vocabulary.org/#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix pilot: <https://assist-iot.eu/pilot2_rdf/> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix aiot: <https://assist-iot.eu/ontologies/aiot#> .
+@prefix aiot_p2: <https://assist-iot.eu/ontologies/aiot_p2#> .
+@prefix carml: <http://carml.taxonic.com/carml/> .
+
+map:map_feature_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "feature" ;
+rr:predicateObjectMap map:pom_000, map:pom_001 ;
+rr:subjectMap map:s_000 .
+
+map:map_location_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "location" ;
+rr:predicateObjectMap map:pom_005, map:pom_006 ;
+rr:subjectMap map:s_002 .
+
+map:map_obs_hum_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_hum" ;
+rr:predicateObjectMap map:pom_009, map:pom_010, map:pom_011, map:pom_012, map:pom_013 ;
+rr:subjectMap map:s_004 .
+
+map:map_obs_pressure_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_pressure" ;
+rr:predicateObjectMap map:pom_031, map:pom_032, map:pom_033, map:pom_034, map:pom_035 ;
+rr:subjectMap map:s_010 .
+
+map:map_obs_rain_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_rain" ;
+rr:predicateObjectMap map:pom_097, map:pom_098, map:pom_099, map:pom_100, map:pom_101 ;
+rr:subjectMap map:s_028 .
+
+map:map_obs_sun_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_sun" ;
+rr:predicateObjectMap map:pom_086, map:pom_087, map:pom_088, map:pom_089, map:pom_090 ;
+rr:subjectMap map:s_025 .
+
+map:map_obs_temp_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_temp" ;
+rr:predicateObjectMap map:pom_075, map:pom_076, map:pom_077, map:pom_078, map:pom_079 ;
+rr:subjectMap map:s_022 .
+
+map:map_obs_uv_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_uv" ;
+rr:predicateObjectMap map:pom_020, map:pom_021, map:pom_022, map:pom_023, map:pom_024 ;
+rr:subjectMap map:s_007 .
+
+map:map_obs_wind_dir_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_wind_dir" ;
+rr:predicateObjectMap map:pom_064, map:pom_065, map:pom_066, map:pom_067, map:pom_068 ;
+rr:subjectMap map:s_019 .
+
+map:map_obs_wind_speed_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_wind_speed" ;
+rr:predicateObjectMap map:pom_042, map:pom_043, map:pom_044, map:pom_045, map:pom_046 ;
+rr:subjectMap map:s_013 .
+
+map:map_obs_wind_speed_avg_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "obs_wind_speed_avg" ;
+rr:predicateObjectMap map:pom_053, map:pom_054, map:pom_055, map:pom_056, map:pom_057 ;
+rr:subjectMap map:s_016 .
+
+map:map_prop_hum_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_hum" ;
+rr:predicateObjectMap map:pom_007, map:pom_008 ;
+rr:subjectMap map:s_003 .
+
+map:map_prop_pressure_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_pressure" ;
+rr:predicateObjectMap map:pom_029, map:pom_030 ;
+rr:subjectMap map:s_009 .
+
+map:map_prop_rain_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_rain" ;
+rr:predicateObjectMap map:pom_095, map:pom_096 ;
+rr:subjectMap map:s_027 .
+
+map:map_prop_sun_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_sun" ;
+rr:predicateObjectMap map:pom_084, map:pom_085 ;
+rr:subjectMap map:s_024 .
+
+map:map_prop_temp_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_temp" ;
+rr:predicateObjectMap map:pom_073, map:pom_074 ;
+rr:subjectMap map:s_021 .
+
+map:map_prop_uv_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_uv" ;
+rr:predicateObjectMap map:pom_018, map:pom_019 ;
+rr:subjectMap map:s_006 .
+
+map:map_prop_wind_dir_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_wind_dir" ;
+rr:predicateObjectMap map:pom_062, map:pom_063 ;
+rr:subjectMap map:s_018 .
+
+map:map_prop_wind_speed_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_wind_speed" ;
+rr:predicateObjectMap map:pom_040, map:pom_041 ;
+rr:subjectMap map:s_012 .
+
+map:map_prop_wind_speed_avg_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "prop_wind_speed_avg" ;
+rr:predicateObjectMap map:pom_051, map:pom_052 ;
+rr:subjectMap map:s_015 .
+
+map:map_res_hum_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_hum" ;
+rr:predicateObjectMap map:pom_014, map:pom_015, map:pom_016, map:pom_017 ;
+rr:subjectMap map:s_005 .
+
+map:map_res_pressure_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_pressure" ;
+rr:predicateObjectMap map:pom_036, map:pom_037, map:pom_038, map:pom_039 ;
+rr:subjectMap map:s_011 .
+
+map:map_res_rain_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_rain" ;
+rr:predicateObjectMap map:pom_102, map:pom_103, map:pom_104, map:pom_105 ;
+rr:subjectMap map:s_029 .
+
+map:map_res_sun_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_sun" ;
+rr:predicateObjectMap map:pom_091, map:pom_092, map:pom_093, map:pom_094 ;
+rr:subjectMap map:s_026 .
+
+map:map_res_temp_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_temp" ;
+rr:predicateObjectMap map:pom_080, map:pom_081, map:pom_082, map:pom_083 ;
+rr:subjectMap map:s_023 .
+
+map:map_res_uv_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_uv" ;
+rr:predicateObjectMap map:pom_025, map:pom_026, map:pom_027, map:pom_028 ;
+rr:subjectMap map:s_008 .
+
+map:map_res_wind_dir_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_wind_dir" ;
+rr:predicateObjectMap map:pom_069, map:pom_070, map:pom_071, map:pom_072 ;
+rr:subjectMap map:s_020 .
+
+map:map_res_wind_speed_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_wind_speed" ;
+rr:predicateObjectMap map:pom_047, map:pom_048, map:pom_049, map:pom_050 ;
+rr:subjectMap map:s_014 .
+
+map:map_res_wind_speed_avg_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "res_wind_speed_avg" ;
+rr:predicateObjectMap map:pom_058, map:pom_059, map:pom_060, map:pom_061 ;
+rr:subjectMap map:s_017 .
+
+map:map_sensor_000 rml:logicalSource map:source_000 ;
+a rr:TriplesMap ;
+rdfs:label "sensor" ;
+rr:predicateObjectMap map:pom_002, map:pom_003, map:pom_004 ;
+rr:subjectMap map:s_001 .
+
+map:om_000 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/FeatureOfInterest" ;
+rr:termType rr:IRI .
+
+map:om_001 a rr:ObjectMap ;
+rr:constant "Outside conditions on the worksite" ;
+rr:termType rr:Literal .
+
+map:om_002 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Sensor" ;
+rr:termType rr:IRI .
+
+map:om_003 a rr:ObjectMap ;
+rr:constant "Davis Vantage Pro 2 weather station installed on the pilot site" ;
+rr:termType rr:Literal .
+
+map:om_004 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_location_000 .
+
+map:om_005 a rr:ObjectMap ;
+rr:constant "http://www.opengis.net/ont/geosparql#Geometry" ;
+rr:termType rr:IRI .
+
+map:om_006 a rr:ObjectMap ;
+rr:datatype geosparql:wktLiteral ;
+rr:template "Point({location.longitude} {location.latitude})" ;
+rr:termType rr:Literal .
+
+map:om_007 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/RelativeHumidity" ;
+rr:termType rr:IRI .
+
+map:om_008 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_009 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_010 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_011 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_012 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_013 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_hum_000 .
+
+map:om_014 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_015 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_016 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_hum_000 .
+
+map:om_017 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/percent" ;
+rr:termType rr:IRI .
+
+map:om_018 rml:reference "hum_out" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_019 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#UvIndex" ;
+rr:termType rr:IRI .
+
+map:om_020 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_021 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_022 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_023 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_024 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_025 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_uv_000 .
+
+map:om_026 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_027 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_028 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_uv_000 .
+
+map:om_029 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/one" ;
+rr:termType rr:IRI .
+
+map:om_030 rml:reference "uv" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_031 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#AtmosphericPressure" ;
+rr:termType rr:IRI .
+
+map:om_032 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_033 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_034 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_035 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_036 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_037 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_pressure_000 .
+
+map:om_038 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_039 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_040 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_pressure_000 .
+
+map:om_041 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#inchHg" ;
+rr:termType rr:IRI .
+
+map:om_042 rml:reference "barometer" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_043 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#WindSpeed" ;
+rr:termType rr:IRI .
+
+map:om_044 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_045 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_046 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_047 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_048 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_049 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_wind_speed_000 .
+
+map:om_050 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_051 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_052 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_wind_speed_000 .
+
+map:om_053 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/mile-StatutePerHour" ;
+rr:termType rr:IRI .
+
+map:om_054 rml:reference "wind_speed" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_055 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#AverageWindSpeed" ;
+rr:termType rr:IRI .
+
+map:om_056 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_057 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_058 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_059 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_060 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_061 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_wind_speed_avg_000 .
+
+map:om_062 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_063 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_064 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_wind_speed_avg_000 .
+
+map:om_065 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/mile-StatutePerHour" ;
+rr:termType rr:IRI .
+
+map:om_066 rml:reference "wind_speed_10_min_avg" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_067 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#WindDirection" ;
+rr:termType rr:IRI .
+
+map:om_068 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_069 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_070 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_071 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_072 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_073 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_wind_dir_000 .
+
+map:om_074 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_075 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_076 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_wind_dir_000 .
+
+map:om_077 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/degree" ;
+rr:termType rr:IRI .
+
+map:om_078 rml:reference "wind_direction" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_079 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/FahrenheitTemperature" ;
+rr:termType rr:IRI .
+
+map:om_080 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_081 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_082 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_083 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_084 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_085 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_temp_000 .
+
+map:om_086 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_087 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_088 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_temp_000 .
+
+map:om_089 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeFahrenheit" ;
+rr:termType rr:IRI .
+
+map:om_090 rml:reference "temp_out" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_091 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#SolarIrradiance" ;
+rr:termType rr:IRI .
+
+map:om_092 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_093 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_094 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_095 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_096 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_097 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_sun_000 .
+
+map:om_098 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_099 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_100 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_sun_000 .
+
+map:om_101 a rr:ObjectMap ;
+rr:constant "http://www.ontology-of-units-of-measure.org/resource/om-2/wattPerSquareMetre" ;
+rr:termType rr:IRI .
+
+map:om_102 rml:reference "solar_radiation" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:om_103 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#RainRate" ;
+rr:termType rr:IRI .
+
+map:om_104 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/ObservableProperty" ;
+rr:termType rr:IRI .
+
+map:om_105 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_106 a rr:ObjectMap ;
+rr:constant "http://www.w3.org/ns/sosa/Observation" ;
+rr:termType rr:IRI .
+
+map:om_107 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_sensor_000 .
+
+map:om_108 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_feature_000 .
+
+map:om_109 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_prop_rain_000 .
+
+map:om_110 rml:reference "timestamp" ;
+a rr:ObjectMap ;
+rr:datatype xsd:dateTime ;
+rr:termType rr:Literal .
+
+map:om_111 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot#MeasureResult" ;
+rr:termType rr:IRI .
+
+map:om_112 a rr:ObjectMap ;
+rr:parentTriplesMap map:map_obs_rain_000 .
+
+map:om_113 a rr:ObjectMap ;
+rr:constant "https://assist-iot.eu/ontologies/aiot_p2#inchPerHour" ;
+rr:termType rr:IRI .
+
+map:om_114 rml:reference "rain_rate" ;
+a rr:ObjectMap ;
+rr:datatype xsd:float ;
+rr:termType rr:Literal .
+
+map:person_000 <http://purl.org/dc/terms/contributor> <http://xmlns.com/foaf/0.1/Person> ;
+rdfs:label "Piotr Sowiński" ;
+<http://xmlns.com/foaf/0.1/mbox> <mailto:piotr.sowinski@ibspan.waw.pl> .
+
+map:pm_000 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_001 a rr:PredicateMap ;
+rr:constant rdfs:label .
+
+map:pm_002 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_003 a rr:PredicateMap ;
+rr:constant rdfs:label .
+
+map:pm_004 a rr:PredicateMap ;
+rr:constant geosparql:hasGeometry .
+
+map:pm_005 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_006 a rr:PredicateMap ;
+rr:constant geosparql:asWKT .
+
+map:pm_007 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_008 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_009 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_010 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_011 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_012 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_013 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_014 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_015 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_016 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_017 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_018 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_019 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_020 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_021 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_022 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_023 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_024 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_025 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_026 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_027 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_028 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_029 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_030 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_031 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_032 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_033 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_034 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_035 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_036 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_037 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_038 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_039 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_040 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_041 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_042 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_043 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_044 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_045 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_046 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_047 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_048 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_049 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_050 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_051 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_052 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_053 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_054 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_055 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_056 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_057 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_058 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_059 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_060 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_061 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_062 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_063 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_064 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_065 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_066 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_067 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_068 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_069 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_070 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_071 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_072 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_073 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_074 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_075 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_076 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_077 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_078 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_079 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_080 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_081 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_082 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_083 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_084 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_085 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_086 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_087 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_088 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_089 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_090 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_091 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_092 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_093 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_094 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pm_095 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_096 a rr:PredicateMap ;
+rr:constant ssn:isPropertyOf .
+
+map:pm_097 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_098 a rr:PredicateMap ;
+rr:constant sosa:madeBySensor .
+
+map:pm_099 a rr:PredicateMap ;
+rr:constant sosa:hasFeatureOfInterest .
+
+map:pm_100 a rr:PredicateMap ;
+rr:constant sosa:observedProperty .
+
+map:pm_101 a rr:PredicateMap ;
+rr:constant sosa:resultTime .
+
+map:pm_102 a rr:PredicateMap ;
+rr:constant rdf:type .
+
+map:pm_103 a rr:PredicateMap ;
+rr:constant sosa:isResultOf .
+
+map:pm_104 a rr:PredicateMap ;
+rr:constant om:hasUnit .
+
+map:pm_105 a rr:PredicateMap ;
+rr:constant om:hasNumericalValue .
+
+map:pom_000 a rr:PredicateObjectMap ;
+rr:objectMap map:om_000 ;
+rr:predicateMap map:pm_000 .
+
+map:pom_001 a rr:PredicateObjectMap ;
+rr:objectMap map:om_001 ;
+rr:predicateMap map:pm_001 .
+
+map:pom_002 a rr:PredicateObjectMap ;
+rr:objectMap map:om_002 ;
+rr:predicateMap map:pm_002 .
+
+map:pom_003 a rr:PredicateObjectMap ;
+rr:objectMap map:om_003 ;
+rr:predicateMap map:pm_003 .
+
+map:pom_004 a rr:PredicateObjectMap ;
+rr:objectMap map:om_004 ;
+rr:predicateMap map:pm_004 .
+
+map:pom_005 a rr:PredicateObjectMap ;
+rr:objectMap map:om_005 ;
+rr:predicateMap map:pm_005 .
+
+map:pom_006 a rr:PredicateObjectMap ;
+rr:objectMap map:om_006 ;
+rr:predicateMap map:pm_006 .
+
+map:pom_007 a rr:PredicateObjectMap ;
+rr:objectMap map:om_007, map:om_008 ;
+rr:predicateMap map:pm_007 .
+
+map:pom_008 a rr:PredicateObjectMap ;
+rr:objectMap map:om_009 ;
+rr:predicateMap map:pm_008 .
+
+map:pom_009 a rr:PredicateObjectMap ;
+rr:objectMap map:om_010 ;
+rr:predicateMap map:pm_009 .
+
+map:pom_010 a rr:PredicateObjectMap ;
+rr:objectMap map:om_011 ;
+rr:predicateMap map:pm_010 .
+
+map:pom_011 a rr:PredicateObjectMap ;
+rr:objectMap map:om_012 ;
+rr:predicateMap map:pm_011 .
+
+map:pom_012 a rr:PredicateObjectMap ;
+rr:objectMap map:om_013 ;
+rr:predicateMap map:pm_012 .
+
+map:pom_013 a rr:PredicateObjectMap ;
+rr:objectMap map:om_014 ;
+rr:predicateMap map:pm_013 .
+
+map:pom_014 a rr:PredicateObjectMap ;
+rr:objectMap map:om_015 ;
+rr:predicateMap map:pm_014 .
+
+map:pom_015 a rr:PredicateObjectMap ;
+rr:objectMap map:om_016 ;
+rr:predicateMap map:pm_015 .
+
+map:pom_016 a rr:PredicateObjectMap ;
+rr:objectMap map:om_017 ;
+rr:predicateMap map:pm_016 .
+
+map:pom_017 a rr:PredicateObjectMap ;
+rr:objectMap map:om_018 ;
+rr:predicateMap map:pm_017 .
+
+map:pom_018 a rr:PredicateObjectMap ;
+rr:objectMap map:om_019, map:om_020 ;
+rr:predicateMap map:pm_018 .
+
+map:pom_019 a rr:PredicateObjectMap ;
+rr:objectMap map:om_021 ;
+rr:predicateMap map:pm_019 .
+
+map:pom_020 a rr:PredicateObjectMap ;
+rr:objectMap map:om_022 ;
+rr:predicateMap map:pm_020 .
+
+map:pom_021 a rr:PredicateObjectMap ;
+rr:objectMap map:om_023 ;
+rr:predicateMap map:pm_021 .
+
+map:pom_022 a rr:PredicateObjectMap ;
+rr:objectMap map:om_024 ;
+rr:predicateMap map:pm_022 .
+
+map:pom_023 a rr:PredicateObjectMap ;
+rr:objectMap map:om_025 ;
+rr:predicateMap map:pm_023 .
+
+map:pom_024 a rr:PredicateObjectMap ;
+rr:objectMap map:om_026 ;
+rr:predicateMap map:pm_024 .
+
+map:pom_025 a rr:PredicateObjectMap ;
+rr:objectMap map:om_027 ;
+rr:predicateMap map:pm_025 .
+
+map:pom_026 a rr:PredicateObjectMap ;
+rr:objectMap map:om_028 ;
+rr:predicateMap map:pm_026 .
+
+map:pom_027 a rr:PredicateObjectMap ;
+rr:objectMap map:om_029 ;
+rr:predicateMap map:pm_027 .
+
+map:pom_028 a rr:PredicateObjectMap ;
+rr:objectMap map:om_030 ;
+rr:predicateMap map:pm_028 .
+
+map:pom_029 a rr:PredicateObjectMap ;
+rr:objectMap map:om_031, map:om_032 ;
+rr:predicateMap map:pm_029 .
+
+map:pom_030 a rr:PredicateObjectMap ;
+rr:objectMap map:om_033 ;
+rr:predicateMap map:pm_030 .
+
+map:pom_031 a rr:PredicateObjectMap ;
+rr:objectMap map:om_034 ;
+rr:predicateMap map:pm_031 .
+
+map:pom_032 a rr:PredicateObjectMap ;
+rr:objectMap map:om_035 ;
+rr:predicateMap map:pm_032 .
+
+map:pom_033 a rr:PredicateObjectMap ;
+rr:objectMap map:om_036 ;
+rr:predicateMap map:pm_033 .
+
+map:pom_034 a rr:PredicateObjectMap ;
+rr:objectMap map:om_037 ;
+rr:predicateMap map:pm_034 .
+
+map:pom_035 a rr:PredicateObjectMap ;
+rr:objectMap map:om_038 ;
+rr:predicateMap map:pm_035 .
+
+map:pom_036 a rr:PredicateObjectMap ;
+rr:objectMap map:om_039 ;
+rr:predicateMap map:pm_036 .
+
+map:pom_037 a rr:PredicateObjectMap ;
+rr:objectMap map:om_040 ;
+rr:predicateMap map:pm_037 .
+
+map:pom_038 a rr:PredicateObjectMap ;
+rr:objectMap map:om_041 ;
+rr:predicateMap map:pm_038 .
+
+map:pom_039 a rr:PredicateObjectMap ;
+rr:objectMap map:om_042 ;
+rr:predicateMap map:pm_039 .
+
+map:pom_040 a rr:PredicateObjectMap ;
+rr:objectMap map:om_043, map:om_044 ;
+rr:predicateMap map:pm_040 .
+
+map:pom_041 a rr:PredicateObjectMap ;
+rr:objectMap map:om_045 ;
+rr:predicateMap map:pm_041 .
+
+map:pom_042 a rr:PredicateObjectMap ;
+rr:objectMap map:om_046 ;
+rr:predicateMap map:pm_042 .
+
+map:pom_043 a rr:PredicateObjectMap ;
+rr:objectMap map:om_047 ;
+rr:predicateMap map:pm_043 .
+
+map:pom_044 a rr:PredicateObjectMap ;
+rr:objectMap map:om_048 ;
+rr:predicateMap map:pm_044 .
+
+map:pom_045 a rr:PredicateObjectMap ;
+rr:objectMap map:om_049 ;
+rr:predicateMap map:pm_045 .
+
+map:pom_046 a rr:PredicateObjectMap ;
+rr:objectMap map:om_050 ;
+rr:predicateMap map:pm_046 .
+
+map:pom_047 a rr:PredicateObjectMap ;
+rr:objectMap map:om_051 ;
+rr:predicateMap map:pm_047 .
+
+map:pom_048 a rr:PredicateObjectMap ;
+rr:objectMap map:om_052 ;
+rr:predicateMap map:pm_048 .
+
+map:pom_049 a rr:PredicateObjectMap ;
+rr:objectMap map:om_053 ;
+rr:predicateMap map:pm_049 .
+
+map:pom_050 a rr:PredicateObjectMap ;
+rr:objectMap map:om_054 ;
+rr:predicateMap map:pm_050 .
+
+map:pom_051 a rr:PredicateObjectMap ;
+rr:objectMap map:om_055, map:om_056 ;
+rr:predicateMap map:pm_051 .
+
+map:pom_052 a rr:PredicateObjectMap ;
+rr:objectMap map:om_057 ;
+rr:predicateMap map:pm_052 .
+
+map:pom_053 a rr:PredicateObjectMap ;
+rr:objectMap map:om_058 ;
+rr:predicateMap map:pm_053 .
+
+map:pom_054 a rr:PredicateObjectMap ;
+rr:objectMap map:om_059 ;
+rr:predicateMap map:pm_054 .
+
+map:pom_055 a rr:PredicateObjectMap ;
+rr:objectMap map:om_060 ;
+rr:predicateMap map:pm_055 .
+
+map:pom_056 a rr:PredicateObjectMap ;
+rr:objectMap map:om_061 ;
+rr:predicateMap map:pm_056 .
+
+map:pom_057 a rr:PredicateObjectMap ;
+rr:objectMap map:om_062 ;
+rr:predicateMap map:pm_057 .
+
+map:pom_058 a rr:PredicateObjectMap ;
+rr:objectMap map:om_063 ;
+rr:predicateMap map:pm_058 .
+
+map:pom_059 a rr:PredicateObjectMap ;
+rr:objectMap map:om_064 ;
+rr:predicateMap map:pm_059 .
+
+map:pom_060 a rr:PredicateObjectMap ;
+rr:objectMap map:om_065 ;
+rr:predicateMap map:pm_060 .
+
+map:pom_061 a rr:PredicateObjectMap ;
+rr:objectMap map:om_066 ;
+rr:predicateMap map:pm_061 .
+
+map:pom_062 a rr:PredicateObjectMap ;
+rr:objectMap map:om_067, map:om_068 ;
+rr:predicateMap map:pm_062 .
+
+map:pom_063 a rr:PredicateObjectMap ;
+rr:objectMap map:om_069 ;
+rr:predicateMap map:pm_063 .
+
+map:pom_064 a rr:PredicateObjectMap ;
+rr:objectMap map:om_070 ;
+rr:predicateMap map:pm_064 .
+
+map:pom_065 a rr:PredicateObjectMap ;
+rr:objectMap map:om_071 ;
+rr:predicateMap map:pm_065 .
+
+map:pom_066 a rr:PredicateObjectMap ;
+rr:objectMap map:om_072 ;
+rr:predicateMap map:pm_066 .
+
+map:pom_067 a rr:PredicateObjectMap ;
+rr:objectMap map:om_073 ;
+rr:predicateMap map:pm_067 .
+
+map:pom_068 a rr:PredicateObjectMap ;
+rr:objectMap map:om_074 ;
+rr:predicateMap map:pm_068 .
+
+map:pom_069 a rr:PredicateObjectMap ;
+rr:objectMap map:om_075 ;
+rr:predicateMap map:pm_069 .
+
+map:pom_070 a rr:PredicateObjectMap ;
+rr:objectMap map:om_076 ;
+rr:predicateMap map:pm_070 .
+
+map:pom_071 a rr:PredicateObjectMap ;
+rr:objectMap map:om_077 ;
+rr:predicateMap map:pm_071 .
+
+map:pom_072 a rr:PredicateObjectMap ;
+rr:objectMap map:om_078 ;
+rr:predicateMap map:pm_072 .
+
+map:pom_073 a rr:PredicateObjectMap ;
+rr:objectMap map:om_079, map:om_080 ;
+rr:predicateMap map:pm_073 .
+
+map:pom_074 a rr:PredicateObjectMap ;
+rr:objectMap map:om_081 ;
+rr:predicateMap map:pm_074 .
+
+map:pom_075 a rr:PredicateObjectMap ;
+rr:objectMap map:om_082 ;
+rr:predicateMap map:pm_075 .
+
+map:pom_076 a rr:PredicateObjectMap ;
+rr:objectMap map:om_083 ;
+rr:predicateMap map:pm_076 .
+
+map:pom_077 a rr:PredicateObjectMap ;
+rr:objectMap map:om_084 ;
+rr:predicateMap map:pm_077 .
+
+map:pom_078 a rr:PredicateObjectMap ;
+rr:objectMap map:om_085 ;
+rr:predicateMap map:pm_078 .
+
+map:pom_079 a rr:PredicateObjectMap ;
+rr:objectMap map:om_086 ;
+rr:predicateMap map:pm_079 .
+
+map:pom_080 a rr:PredicateObjectMap ;
+rr:objectMap map:om_087 ;
+rr:predicateMap map:pm_080 .
+
+map:pom_081 a rr:PredicateObjectMap ;
+rr:objectMap map:om_088 ;
+rr:predicateMap map:pm_081 .
+
+map:pom_082 a rr:PredicateObjectMap ;
+rr:objectMap map:om_089 ;
+rr:predicateMap map:pm_082 .
+
+map:pom_083 a rr:PredicateObjectMap ;
+rr:objectMap map:om_090 ;
+rr:predicateMap map:pm_083 .
+
+map:pom_084 a rr:PredicateObjectMap ;
+rr:objectMap map:om_091, map:om_092 ;
+rr:predicateMap map:pm_084 .
+
+map:pom_085 a rr:PredicateObjectMap ;
+rr:objectMap map:om_093 ;
+rr:predicateMap map:pm_085 .
+
+map:pom_086 a rr:PredicateObjectMap ;
+rr:objectMap map:om_094 ;
+rr:predicateMap map:pm_086 .
+
+map:pom_087 a rr:PredicateObjectMap ;
+rr:objectMap map:om_095 ;
+rr:predicateMap map:pm_087 .
+
+map:pom_088 a rr:PredicateObjectMap ;
+rr:objectMap map:om_096 ;
+rr:predicateMap map:pm_088 .
+
+map:pom_089 a rr:PredicateObjectMap ;
+rr:objectMap map:om_097 ;
+rr:predicateMap map:pm_089 .
+
+map:pom_090 a rr:PredicateObjectMap ;
+rr:objectMap map:om_098 ;
+rr:predicateMap map:pm_090 .
+
+map:pom_091 a rr:PredicateObjectMap ;
+rr:objectMap map:om_099 ;
+rr:predicateMap map:pm_091 .
+
+map:pom_092 a rr:PredicateObjectMap ;
+rr:objectMap map:om_100 ;
+rr:predicateMap map:pm_092 .
+
+map:pom_093 a rr:PredicateObjectMap ;
+rr:objectMap map:om_101 ;
+rr:predicateMap map:pm_093 .
+
+map:pom_094 a rr:PredicateObjectMap ;
+rr:objectMap map:om_102 ;
+rr:predicateMap map:pm_094 .
+
+map:pom_095 a rr:PredicateObjectMap ;
+rr:objectMap map:om_103, map:om_104 ;
+rr:predicateMap map:pm_095 .
+
+map:pom_096 a rr:PredicateObjectMap ;
+rr:objectMap map:om_105 ;
+rr:predicateMap map:pm_096 .
+
+map:pom_097 a rr:PredicateObjectMap ;
+rr:objectMap map:om_106 ;
+rr:predicateMap map:pm_097 .
+
+map:pom_098 a rr:PredicateObjectMap ;
+rr:objectMap map:om_107 ;
+rr:predicateMap map:pm_098 .
+
+map:pom_099 a rr:PredicateObjectMap ;
+rr:objectMap map:om_108 ;
+rr:predicateMap map:pm_099 .
+
+map:pom_100 a rr:PredicateObjectMap ;
+rr:objectMap map:om_109 ;
+rr:predicateMap map:pm_100 .
+
+map:pom_101 a rr:PredicateObjectMap ;
+rr:objectMap map:om_110 ;
+rr:predicateMap map:pm_101 .
+
+map:pom_102 a rr:PredicateObjectMap ;
+rr:objectMap map:om_111 ;
+rr:predicateMap map:pm_102 .
+
+map:pom_103 a rr:PredicateObjectMap ;
+rr:objectMap map:om_112 ;
+rr:predicateMap map:pm_103 .
+
+map:pom_104 a rr:PredicateObjectMap ;
+rr:objectMap map:om_113 ;
+rr:predicateMap map:pm_104 .
+
+map:pom_105 a rr:PredicateObjectMap ;
+rr:objectMap map:om_114 ;
+rr:predicateMap map:pm_105 .
+
+map:rules_000 <http://purl.org/dc/terms/contributor> map:person_000 ;
+<http://rdfs.org/ns/void#exampleResource> map:map_feature_000, map:map_location_000, map:map_obs_hum_000, map:map_obs_pressure_000, map:map_obs_rain_000, map:map_obs_sun_000, map:map_obs_temp_000, map:map_obs_uv_000, map:map_obs_wind_dir_000, map:map_obs_wind_speed_000, map:map_obs_wind_speed_avg_000, map:map_prop_hum_000, map:map_prop_pressure_000, map:map_prop_rain_000, map:map_prop_sun_000, map:map_prop_temp_000, map:map_prop_uv_000, map:map_prop_wind_dir_000, map:map_prop_wind_speed_000, map:map_prop_wind_speed_avg_000, map:map_res_hum_000, map:map_res_pressure_000, map:map_res_rain_000, map:map_res_sun_000, map:map_res_temp_000, map:map_res_uv_000, map:map_res_wind_dir_000, map:map_res_wind_speed_000, map:map_res_wind_speed_avg_000, map:map_sensor_000 ;
+a <http://rdfs.org/ns/void#Dataset> .
+
+map:s_000 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/feature/site_outside> .
+
+map:s_001 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/sensor/ws/{identifier}" .
+
+map:s_002 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/sensor/ws/{identifier}/location" .
+
+map:s_003 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/humidity> .
+
+map:s_004 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/humidity/{timestamp}" .
+
+map:s_005 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/humidity/{timestamp}" .
+
+map:s_006 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/uv> .
+
+map:s_007 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/uv/{timestamp}" .
+
+map:s_008 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/uv/{timestamp}" .
+
+map:s_009 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/pressure> .
+
+map:s_010 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/pressure/{timestamp}" .
+
+map:s_011 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/pressure/{timestamp}" .
+
+map:s_012 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/wind_speed> .
+
+map:s_013 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/wind_speed/{timestamp}" .
+
+map:s_014 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/wind_speed/{timestamp}" .
+
+map:s_015 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/wind_speed_avg> .
+
+map:s_016 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/wind_speed_avg/{timestamp}" .
+
+map:s_017 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/wind_speed_avg/{timestamp}" .
+
+map:s_018 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/wind_dir> .
+
+map:s_019 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/wind_dir/{timestamp}" .
+
+map:s_020 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/wind_dir/{timestamp}" .
+
+map:s_021 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/temp> .
+
+map:s_022 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/temp/{timestamp}" .
+
+map:s_023 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/temp/{timestamp}" .
+
+map:s_024 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/sun> .
+
+map:s_025 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/sun/{timestamp}" .
+
+map:s_026 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/sun/{timestamp}" .
+
+map:s_027 a rr:SubjectMap ;
+rr:constant <https://assist-iot.eu/pilot2_rdf/prop/site_outside/rain> .
+
+map:s_028 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/obs/ws/{identifier}/rain/{timestamp}" .
+
+map:s_029 a rr:SubjectMap ;
+rr:template "https://assist-iot.eu/pilot2_rdf/result/ws/{identifier}/rain/{timestamp}" .
+
+map:source_000 rml:iterator "$" ;
+rml:referenceFormulation ql:JSONPath ;
+rml:source [ a carml:Stream ] ;
+a rml:LogicalSource ;
+rdfs:label "main" .

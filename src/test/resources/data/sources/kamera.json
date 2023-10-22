@@ -1,0 +1,12 @@
+{
+  "identifier": "camera-entrance",
+  "timestamp": "2022-10-24T13:26:06.448117",
+  "info": {
+    "event_type": "unsafe",
+    "safe_people": 4,
+    "unsafe_people": 2,
+    "indeterminate_people": 1
+  },
+  "image_path": "osh-camera/entrance/0f47a465-0b29-41b1-94b1-d23279e8e76c",
+  "version": "2.0.0"
+}

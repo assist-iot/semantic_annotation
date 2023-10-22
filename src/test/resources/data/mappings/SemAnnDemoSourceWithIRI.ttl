@@ -1,0 +1,80 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix map: <http://mapping.example.com/> .
+@prefix ma: <http://www.w3.org/ns/ma-ont#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix schema: <http://schema.org/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix base: <http://example.com/ns#> .
+@prefix carml: <http://carml.taxonic.com/carml/> .
+
+map:rules_000 a <http://rdfs.org/ns/void#Dataset> ;
+              <http://rdfs.org/ns/void#exampleResource> map:map_sensor_000 .
+
+map:map_sensor_000 a rr:TriplesMap ;
+                   rml:logicalSource[
+                         a rml:LogicalSource  ;
+                         rml:iterator "$" ;
+                         rml:referenceFormulation ql:JSONPath ;
+                         # rml:source "data.json" ;
+                         rml:source [
+                               a carml:Stream
+                               # carml:streamName "my-named-stream" ;
+                               ## Name is optional, but streams should be UNNAMED.
+                               ## Otherwise there needs to be additional configuration that specifies, which streaming source to use.
+                           ];
+                     ] ;
+                   rdfs:label "sensor" ;
+                   rr:predicateObjectMap map:pom_000, map:pom_001, map:pom_002, map:pom_003 ;
+                   rr:subjectMap [
+                         a rr:SubjectMap ;
+                         rr:template "http://loc.example.com/sensor/{id}"
+                     ] .
+
+map:pom_000 a rr:PredicateObjectMap ;
+            rr:objectMap [
+                  a rr:ObjectMap ;
+                  rr:constant schema:Thing ;
+                  rr:termType rr:IRI
+              ] ;
+            rr:predicateMap [
+                  a rr:PredicateMap ;
+                  rr:constant rdf:type
+              ] .
+
+map:pom_001 a rr:PredicateObjectMap ;
+            rr:objectMap [
+                  a rr:ObjectMap ;
+                  rml:reference "location.coordinates.latitude" ;
+                  rr:termType rr:Literal
+              ] ;
+            rr:predicateMap [
+                  a rr:PredicateMap ;
+                  rr:constant wgs84_pos:lat
+              ] .
+
+map:pom_002 a rr:PredicateObjectMap ;
+            rr:objectMap [
+                  a rr:ObjectMap ;
+                  rml:reference "location.coordinates.longitude" ;
+                  rr:termType rr:Literal
+              ] ;
+            rr:predicateMap [
+                  a rr:PredicateMap ;
+                  rr:constant wgs84_pos:long
+              ] .
+
+map:pom_003 a rr:PredicateObjectMap ;
+            rr:objectMap [
+                  a rr:ObjectMap ;
+                  rml:reference "id" ;
+                  rr:termType rr:Literal
+              ] ;
+            rr:predicateMap [
+                  a rr:PredicateMap ;
+                  rr:constant schema:identifier
+              ] .

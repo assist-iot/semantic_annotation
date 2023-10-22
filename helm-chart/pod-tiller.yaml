@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-01-17T15:25:43Z"
+  generateName: tiller-deploy-5c79c67896-
+  labels:
+    app: helm
+    name: tiller
+    pod-template-hash: 5c79c67896
+  name: tiller-deploy-5c79c67896-gb8vl
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tiller-deploy-5c79c67896
+    uid: 2838017d-1ea2-417c-a30f-dc92a5e7bf79
+  resourceVersion: "4352"
+  uid: 7486d242-d596-443f-b87a-c79aea95c9e1
+spec:
+  automountServiceAccountToken: true
+  containers:
+  - env:
+    - name: TILLER_NAMESPACE
+      value: kube-system
+    - name: TILLER_HISTORY_MAX
+      value: "0"
+    image: ghcr.io/helm/tiller:v2.17.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /liveness
+        port: 44135
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: tiller
+    ports:
+    - containerPort: 44134
+      name: tiller
+      protocol: TCP
+    - containerPort: 44135
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /readiness
+        port: 44135
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-szfgd
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ubuntu
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: tiller
+  serviceAccountName: tiller
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-szfgd
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-01-17T15:25:43Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-01-18T14:23:13Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-01-18T14:23:13Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-01-17T15:25:43Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://36a6a450822216e33a1bafc52fa12a1703ec52788984a6f07fac22f94a1b7c7f
+    image: ghcr.io/helm/tiller:v2.17.0
+    imageID: ghcr.io/helm/tiller@sha256:4c43eb385032945cad047d2350e4945d913b90b3ab43ee61cecb32a495c6df0f
+    lastState:
+      terminated:
+        containerID: containerd://abf9249b410f2abe77fe907eab16fe62dc814a87c07d14cd619b677718ca2b5d
+        exitCode: 255
+        finishedAt: "2023-01-18T14:23:04Z"
+        reason: Unknown
+        startedAt: "2023-01-18T08:08:25Z"
+    name: tiller
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2023-01-18T14:23:10Z"
+  hostIP: 192.168.161.128
+  phase: Running
+  podIP: 10.42.0.18
+  podIPs:
+  - ip: 10.42.0.18
+  qosClass: BestEffort
+  startTime: "2023-01-17T15:25:43Z"

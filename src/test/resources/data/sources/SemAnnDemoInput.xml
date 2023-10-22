@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sensor>
+    <id>sensors/sensor1</id>
+    <type>Sensor</type>
+    <location>
+        <type>Point</type>
+        <coordinates>
+            <latitude>51.0500000</latitude>
+            <longitude>3.7166700</longitude>
+        </coordinates>
+    </location>
+</sensor>

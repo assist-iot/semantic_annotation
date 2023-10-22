@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--    <Logger name="org.eclipse.paho.client.mqttv3"  level="FINE" />-->
+    <!--    <appender name="PAHO" class="org.eclipse.paho.client.mqttv3">-->
+    <!--    </appender>-->
+
+    <property scope="context" name="loglevel" value="${SEAMAN_LOG_LEVEL:-INFO}"/>
+    <property scope="context" name="logfile_enabled" value="${SEAMAN_LOG_TO_FILE:-false}"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${loglevel}</level>
+        </filter>
+        <encoder>
+            <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg MDC: {%mdc}%n</pattern>
+        </encoder>
+        <!--        <appender-ref ref="PAHO"/>-->
+    </appender>
+
+
+    <if condition='property("logfile_enabled").equalsIgnoreCase("true")'>
+        <then>
+            <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>log/seaman.log</file>
+                <immediateFlush>false</immediateFlush>
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <fileNamePattern>seaman_%d%i{yyyy-MM-dd}.log</fileNamePattern>
+                    <maxFileSize>100MB</maxFileSize>
+                    <maxHistory>60</maxHistory>
+                    <totalSizeCap>500MB</totalSizeCap>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg | MDC: {%mdc}%n</pattern>
+                </encoder>
+                <!--        <appender-ref ref="PAHO"/>-->
+            </appender>
+
+            <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+                <queueSize>8192</queueSize>
+                <neverBlock>true</neverBlock>
+                <appender-ref ref="FILE"/>
+                <maxFlushTime>5000</maxFlushTime>
+            </appender>
+        </then>
+    </if>
+
+
+    <root level="${loglevel}">
+        <if condition='property("logfile_enabled").equalsIgnoreCase("true")'>
+            <then>
+                <appender-ref ref="ASYNC"/>
+            </then>
+        </if>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

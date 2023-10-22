@@ -1,0 +1,39 @@
+{
+  "time": "2022-10-11T14:03:07+02:00",
+  "location": {
+    "x": 1660,
+    "y": 5384,
+    "z": 1525,
+    "type": "3D"
+  },
+  "watch": {
+    "connected": 1,
+    "battery": 60,
+    "heartrate": 44
+  },
+  "ranges": [{
+    "uid": 21889,
+    "distance": 10614
+  },
+    {
+      "uid": 5632,
+      "distance": 11292
+    },
+    {
+      "uid": 7555,
+      "distance": 5572
+    },
+    {
+      "uid": 2950,
+      "distance": 5084
+    },
+    {
+      "uid": 7596,
+      "distance": 1309
+    },
+    {
+      "uid": 18836,
+      "distance": 8562
+    }
+  ]
+}

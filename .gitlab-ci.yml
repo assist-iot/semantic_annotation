@@ -1,0 +1,8 @@
+include:
+  - project: 'sripas/gitlab-ci-templates'
+    file: 'docker-build.gitlab-ci.yml'
+
+docker-build:
+  variables:
+    # Multi-arch build
+    ANT_DOCKER_ARCH: linux/amd64,linux/arm64

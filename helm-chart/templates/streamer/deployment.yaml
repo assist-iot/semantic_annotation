@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "streamer.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "streamer.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.streamer.autoscaling.enabled }}
+  replicas: {{ .Values.streamer.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "streamer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "streamer.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.streamer.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.enablerNodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if not .Values.enablerNodeSelector }}
+        {{- with .Values.streamer.nodeSelector }}
+      nodeSelector:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      {{- with .Values.streamer.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.streamer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.streamer.podSecurityContext | nindent 8 }}
+      containers:
+        - name: streamer
+          securityContext:
+            {{- toYaml .Values.streamer.securityContext | nindent 12 }}
+          image: "{{ .Values.streamer.image.repository }}:{{ .Values.streamer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.streamer.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.streamer.service.containerPort }}
+              protocol: {{ .Values.streamer.service.protocol }}
+          resources:
+            {{- toYaml .Values.streamer.resources | nindent 12 }}
+          env:
+            - name: SEAMAN_STANDALONE_MODE
+              value: {{ if eq .Values.flavor "standalone" }}"true"{{ else }}"false"{{ end }}
+            - name: SEAMAN_LOG_TO_FILE
+              value: {{ .Values.streamer.envVars.SEAMAN_LOG_TO_FILE | quote }}
+            - name: SEAMAN_LOG_LEVEL
+              value: {{ .Values.streamer.envVars.SEAMAN_LOG_LEVEL | quote }}
+            - name: SEAMAN_RESTORE_STOPPED
+              value: {{ .Values.streamer.envVars.SEAMAN_RESTORE_STOPPED | quote }}
+            - name: MONGO_HOST
+              value: {{ .Values.streamer.envVars.MONGO_HOST  | quote }}
+            - name: MONGO_PORT
+              value: {{ .Values.streamer.envVars.MONGO_PORT  | quote }}
+            - name: MONGO_DATABASE
+              value: {{ .Values.streamer.envVars.MONGO_DATABASE  | quote }}
+            - name: MONGO_USER
+              value: {{ .Values.streamer.envVars.MONGO_USER  | quote }}
+            - name: MONGO_PASSWORD
+              value: {{ .Values.streamer.envVars.MONGO_PASSWORD  | quote }}

@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "name": "Demo channel",
+    "description": "Demonstrative channel with example mapping.",
+    "tags": [
+      "wgs_84",
+      "demo",
+      "geolocation"
+    ],
+    "mapping": {
+      "name": "Demo RML",
+      "description": "Simple RML mapping of geoposition into wgs_84.",
+      "tags": [
+        "wgs_84",
+        "geolocation"
+      ],
+      "outputFormat": "TTL",
+      "inputFormat": "JSON",
+      "rml": "@prefix rr: <http://www.w3.org/ns/r2rml#> .\n@prefix rml: <http://semweb.mmlab.be/ns/rml#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix ql: <http://semweb.mmlab.be/ns/ql#> .\n@prefix map: <http://mapping.example.com/> .\n@prefix ma: <http://www.w3.org/ns/ma-ont#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .\n@prefix schema: <http://schema.org/> .\n@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .\n@prefix base: <http://example.com/ns#> .\n@prefix carml: <http://carml.taxonic.com/carml/> .\n\nmap:rules_000 a <http://rdfs.org/ns/void#Dataset> ;\n              <http://rdfs.org/ns/void#exampleResource> map:map_sensor_000 .\n\nmap:map_sensor_000 a rr:TriplesMap ;\n                   rml:logicalSource[\n                         a rml:LogicalSource  ;\n                         rml:iterator \"$\" ;\n                         rml:referenceFormulation ql:JSONPath ;\n                         # rml:source \"data.json\" ;\n                         rml:source [\n                               a carml:Stream\n                               # carml:streamName \"my-named-stream\" ;\n                               ## Name is optional, but streams should be UNNAMED.\n                               ## Otherwise there needs to be additional configuration that specifies, which streaming source to use.\n                           ];\n                     ] ;\n                   rdfs:label \"sensor\" ;\n                   rr:predicateObjectMap map:pom_000, map:pom_001, map:pom_002, map:pom_003 ;\n                   rr:subjectMap [\n                         a rr:SubjectMap ;\n                         rr:template \"http://loc.example.com/sensor/{id}\"\n                     ] .\n\nmap:pom_000 a rr:PredicateObjectMap ;\n            rr:objectMap [\n                  a rr:ObjectMap ;\n                  rr:constant schema:Thing ;\n                  rr:termType rr:IRI\n              ] ;\n            rr:predicateMap [\n                  a rr:PredicateMap ;\n                  rr:constant rdf:type\n              ] .\n\nmap:pom_001 a rr:PredicateObjectMap ;\n            rr:objectMap [\n                  a rr:ObjectMap ;\n                  rml:reference \"location.coordinates.latitude\" ;\n                  rr:termType rr:Literal\n              ] ;\n            rr:predicateMap [\n                  a rr:PredicateMap ;\n                  rr:constant wgs84_pos:lat\n              ] .\n\nmap:pom_002 a rr:PredicateObjectMap ;\n            rr:objectMap [\n                  a rr:ObjectMap ;\n                  rml:reference \"location.coordinates.longitude\" ;\n                  rr:termType rr:Literal\n              ] ;\n            rr:predicateMap [\n                  a rr:PredicateMap ;\n                  rr:constant wgs84_pos:long\n              ] .\n\nmap:pom_003 a rr:PredicateObjectMap ;\n            rr:objectMap [\n                  a rr:ObjectMap ;\n                  rml:reference \"id\" ;\n                  rr:termType rr:Literal\n              ] ;\n            rr:predicateMap [\n                  a rr:PredicateMap ;\n                  rr:constant schema:identifier\n              ] .\n"
+    }
+  },
+  "settings": {
+    "inputTopicSettings": {
+      "topic": "test/demo/auth/input",
+      "brokerType": "MQTT",
+      "mqttSettings": {
+        "host": "127.0.0.1",
+        "port": 1883,
+        "protocol": "tcp",
+        "user": "username",
+        "password": "password"
+      }
+    },
+    "outputTopicSettings": {
+      "brokerType": "MQTT",
+      "topic": "test/demo/auth/output"
+    },
+    "errorTopicSettings": {
+      "brokerType": "MQTT",
+      "mqttSettings": {
+        "host": "127.0.0.1",
+        "port": 1883,
+        "protocol": "tcp"
+      },
+      "topic": "test/demo/auth/error"
+    },
+    "monitorInputTopicSettings": {
+      "topic": "test/demo/auth/monitor/input",
+      "brokerType": "MQTT"
+    },
+    "monitorOutputTopicSettings": {
+      "topic": "test/demo/auth/monitor/output",
+      "brokerType": "MQTT"
+    }
+  },
+  "status": {
+    "errorTopicEnabled": true,
+    "isStopped": false
+  }
+}

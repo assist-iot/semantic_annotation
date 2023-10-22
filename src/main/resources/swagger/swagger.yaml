@@ -1,0 +1,1045 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Seaman Streamer
+  description: API for streaming component of ASSIST-IoT semantic annotator (Seaman)
+
+  contact:
+    email: "pawel.szmeja@ibspan.waw.pl"
+
+# TODO: Fill in ASSIST-IoT license
+#  license:
+#    name: "Apache 2.0"
+#    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+#  termsOfService: "http://swagger.io/terms/"
+
+#host: "seaman.swagger.io"
+#basePath: "/v2"
+
+externalDocs:
+  # TODO: Link to Seaman docs
+  description: "ASSIST-IoT project documentation"
+  url: "https://assist-iot-enablers-documentation.readthedocs.io/en/latest/"
+
+#schemes:
+#  - "https"
+#  - "http"
+
+# servers:
+#   - url: https://example.io/v1
+
+# security:
+#   - BasicAuth: []
+
+tags:
+  - name: channels
+    description: Channels management
+  - name: annotations
+    description: |
+      Annotations storage management - WARNING: annotations storage is not available in standalone mode
+  - name: information
+    description: Information about the server
+
+paths:
+
+  /channels:
+    get:
+      description: Returns an array of channel IDs for currently managed channels.
+      tags:
+        - channels
+      parameters:
+        - $ref: '#/components/parameters/FilterAll'
+        - $ref: '#/components/parameters/FilterChannelSettings'
+        - $ref: '#/components/parameters/FilterChannelStatus'
+        - $ref: '#/components/parameters/FilterChannelMetadata'
+        - $ref: '#/components/parameters/FilterChannelRml'
+      responses:
+        '200':
+          description: |
+            An object, where keys are IDs of currently managed channels, and values are objects with contents dependent
+            on query parameters. The objects will be empty, if no query parameters are given.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/CARMLChannelInfo'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+    post:
+      description: |
+        Add a new channel definition, and optionally materialize and start the channel.
+        Depending on initial status, the channel may be added, but not started.
+      tags:
+        - channels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CARMLChannelInfo'
+      responses:
+        '200':
+          description: |
+            Successfully created a new channel.
+            Note, that this does not mean, that the channel is running.
+            If the channel was added with stopped status, or there was an error immediatelly after
+            successful initialization, the channel will not run.
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: ID of the created channel
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+  /channels/{channelId}:
+    get:
+      description: Returns an object representing a channel.
+      tags:
+        - channels
+      parameters:
+        - $ref: '#/components/parameters/ChannelId'
+        - $ref: '#/components/parameters/FilterAll'
+        - $ref: '#/components/parameters/FilterChannelSettings'
+        - $ref: '#/components/parameters/FilterChannelStatus'
+        - $ref: '#/components/parameters/FilterChannelMetadata'
+        - $ref: '#/components/parameters/FilterChannelRml'
+      responses:
+        '200':
+          description: |
+            An object describing a channel, with contents dependent on query parameters. The object will be empty, if no query parameters are given.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/CARMLChannelInfo'
+        '404':
+          $ref: '#/components/responses/404NoSuchChannelError'
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+
+    patch:
+      description: |
+        Updates the channel status with values provided in the channel status object provided in the request body.
+        With the the channel status object, the channel can be started or stopped, or topic settings updated.
+        
+        Note, that under certain conditions, the changes from the provided channel status object cannot be applied.
+        If the channel is stopped, it cannot be stopped again. A started channel will not be (re)started again.
+        If a topic is not configured for a channel, it cannot be enabled or disabled.
+      tags:
+        - channels
+      parameters:
+        - $ref: '#/components/parameters/ChannelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelStatus'
+      # TODO: Document responses
+      responses:
+        '200':
+          description: |
+            Channel is now in a state that was specified in the request object
+          content:
+            text/plain:
+              schema: string
+              description: |
+                Text explaining changes, that were made. If the channel was already in a state described by the request content,
+                no actual changes will have been applied.
+        '422':
+          description: Request object was well-formated, but contained invalid updates.
+          content:
+            text/plain:
+              schema: string
+              description: Text explaining why the request object contained invalid updates.
+        '404':
+          $ref: '#/components/responses/404NoSuchChannelError'
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+    delete:
+      description: Stops and removes a channel from list of managed channels.
+      tags:
+        - channels
+      parameters:
+        - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: |
+            Channel was successfully stopped and removed.
+          content:
+          text/plain:
+            schema: string
+            description: Text explaining applied changes.
+        '404':
+          $ref: '#/components/responses/404NoSuchChannelError'
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+  /channels/{channelId}/restart:
+    patch:
+      description: Stops a channel, and starts it back up again. This call is equivalent to stopping and starting a channel with the channel status update endpoint.
+      tags:
+        - channels
+      parameters:
+        - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: |
+            Channel was successfully restarted. Note, that this does not mean, that the channel is now running, because it may
+            have stopped right after being restarted.
+          content:
+            text/plain:
+              schema: string
+              description: Text explaining applied changes.
+        '404':
+          $ref: '#/components/responses/404NoSuchChannelError'
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+  /annotations:
+    get:
+      description: Returns an array of annotation IDs for currently stored annotations.
+      tags:
+        - annotations
+      parameters:
+        - $ref: '#/components/parameters/FilterAll'
+        - $ref: '#/components/parameters/FilterAnnotationHeader'
+        - $ref: '#/components/parameters/FilterAnnotationRml'
+      responses:
+        '200':
+          description: |
+            An object, where keys are IDs of currently stored annotations, and values are objects with contents dependent
+            on query parameters. The objects will be empty, if no query parameters are given.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RMLMapping'
+        '404':
+          $ref: '#/components/responses/404AnnotationsServiceNotAvailableError'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+    post:
+      description: |
+        Add a new annotation to storage.
+      tags:
+        - annotations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMLMapping'
+      responses:
+        '200':
+          description: |
+            Successfully stored a new annotation.
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: ID of the stored annotation
+        '404':
+          $ref: '#/components/responses/404AnnotationsServiceNotAvailableError'
+        '500':
+          $ref: '#/components/responses/500Error'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+  /annotations/{annotationId}:
+    get:
+      description: Returns an object representing a stored annotation.
+      tags:
+        - annotations
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+        - $ref: '#/components/parameters/FilterAll'
+        - $ref: '#/components/parameters/FilterAnnotationHeader'
+        - $ref: '#/components/parameters/FilterAnnotationRml'
+      responses:
+        '200':
+          description: |
+            An object describing an annotation, with contents dependent on query parameters. The object will be empty, if no query parameters are given.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RMLMapping'
+        '404':
+          $ref: '#/components/responses/404NoAnnotationOrNotAvailableError'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+    delete:
+      description: Removes an annotation from storage.
+      tags:
+        - annotations
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '200':
+          description: |
+            Successfully removed an annotation from storage.
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Text explaining applied changes.
+        '404':
+          $ref: '#/components/responses/404NoAnnotationOrNotAvailableError'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+  /version:
+    get:
+      description: Returns information about the underlying streaming core
+      tags:
+        - information
+      responses:
+        '200':
+          description: Successfully returned version information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionInfo'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+  /status:
+    get:
+      description: Returns information about current initialization status
+      tags:
+        - information
+      responses:
+        '200':
+          description: Successfully returned status information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+
+  /settings:
+    get:
+      description: Returns information about the current default settings
+      tags:
+        - information
+      responses:
+        '200':
+          description: Successfully returned settings information
+          content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsInfo'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+components:
+  # securitySchemes:
+  #   BasicAuth:
+  #     type: http
+  #     scheme: basic
+
+  schemas:
+    # TODO: Add documentation - descriptions, examples and such - to every schema
+
+    CARMLChannelInfo:
+      type: object
+      description: |
+        Information about a CARML channel
+      #, required to instantiate a new channel.
+      required:
+        - metadata
+        - settings
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CARMLMetadata'
+        settings:
+          $ref: '#/components/schemas/ChannelSettings'
+        status:
+          $ref: '#/components/schemas/ChannelStatus'
+      example:
+        metadata:
+          name: Demo channel
+          description: Demonstrative channel with example mapping.
+          tags:
+            - wgs_84
+            - demo
+            - geolocation
+          mapping:
+            name: Demo RML
+            description: Simple RML mapping of geoposition into wgs_84.
+            tags:
+              - wgs_84
+              - geolocation
+            outputFormat: TTL
+            inputFormat: JSON
+            rml: |
+              @prefix rr: <http://www.w3.org/ns/r2rml#> .
+              @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+              @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+              @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+              @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+              @prefix map: <http://mapping.example.com/> .
+              @prefix ma: <http://www.w3.org/ns/ma-ont#> .
+              @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+              @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+              @prefix schema: <http://schema.org/> .
+              @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+              @prefix base: <http://example.com/ns#> .
+              @prefix carml: <http://carml.taxonic.com/carml/> .
+
+              map:rules_000 a <http://rdfs.org/ns/void#Dataset> ;
+                            <http://rdfs.org/ns/void#exampleResource> map:map_sensor_000 .
+
+              map:map_sensor_000 a rr:TriplesMap ;
+                                 rml:logicalSource[
+                                       a rml:LogicalSource  ;
+                                       rml:iterator "$" ;
+                                       rml:referenceFormulation ql:JSONPath ;
+                                       # rml:source "data.json" ;
+                                       rml:source [
+                                             a carml:Stream
+                                             # carml:streamName "my-named-stream" ;
+                                             ## Name is optional, but streams should be UNNAMED.
+                                             ## Otherwise there needs to be additional configuration that specifies, which streaming source to use.
+                                         ];
+                                   ] ;
+                                 rdfs:label "sensor" ;
+                                 rr:predicateObjectMap map:pom_000, map:pom_001, map:pom_002, map:pom_003 ;
+                                 rr:subjectMap [
+                                       a rr:SubjectMap ;
+                                       rr:template "http://loc.example.com/sensor/{id}"
+                                   ] .
+
+              map:pom_000 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rr:constant schema:Thing ;
+                                rr:termType rr:IRI
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant rdf:type
+                            ] .
+
+              map:pom_001 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "location.coordinates.latitude" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant wgs84_pos:lat
+                            ] .
+
+              map:pom_002 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "location.coordinates.longitude" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant wgs84_pos:long
+                            ] .
+
+              map:pom_003 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "id" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant schema:identifier
+                            ] .
+
+        settings:
+          inputTopicSettings:
+            topic: test/input
+            brokerType: MQTT
+          outputTopicSettings:
+            brokerType: MQTT
+            topic: test/output
+          errorTopicSettings:
+            brokerType: MQTT
+            mqttSettings:
+              host: 127.0.0.1
+              port: 1883
+              protocol: tcp
+            topic: test/error
+
+        status:
+          errorTopicEnabled: true
+          isStopped: false
+
+
+    ChannelSettings:
+      type: object
+      description: |
+        Settings for a streaming channel and it's topics.
+        If no settings for optional topics are provided, those topics are permanently disabled for the channel.
+        If no settings for parallelism or buffer size are provided, default values are used.
+      required:
+        - inputTopicSettings
+        - outputTopicSettings
+      properties:
+        channelId:
+          type: string
+          description: Optional channel ID. If no ID is provided, a unique ID will be generated.
+        inputTopicSettings:
+          $ref: '#/components/schemas/TopicSettings'
+        outputTopicSettings:
+          $ref: '#/components/schemas/TopicSettings'
+        monitorInputTopicSettings:
+          $ref: '#/components/schemas/TopicSettings'
+        monitorOutputTopicSettings:
+          $ref: '#/components/schemas/TopicSettings'
+        errorTopicSettings:
+          $ref: '#/components/schemas/TopicSettings'
+        parallelism:
+          type: integer
+          description: Number of message threads, that will run in parallel.
+        bufferSize:
+          type: integer
+          description: Number of messages that can be kept in the memory buffer of this channel, before it backpressures.
+      example:
+        inputTopicSettings:
+          brokerType: "MQTT"
+          topic: "example/input"
+        "outputTopicSettings":
+          brokerType: "MQTT"
+          topic: "example/output"
+          mqttSettings:
+            host: "127.0.0.1"
+            port: 1883
+            protocol: "tcp"
+        errorTopicSettings:
+          brokerType: "KAFKA"
+          topic: "myChannelError"
+
+    CARMLMetadata:
+      type: object
+      description: Information and settings for CARML/RML transformer.
+      required:
+        - mapping
+      properties:
+        name:
+          type: string
+          description: Optional, descriptive name of a CARML channel to which this metadata will be attached.
+        author:
+          type: string
+          description: Optional, descriptive name of the author of a CARML channel to which this metadata will be attached.
+        tags:
+          type: array
+          description: Optional array of tags for a CARML channel to which this metadata will be attached.
+          items:
+            type: string
+        mapping:
+          $ref: '#/components/schemas/RMLMapping'
+        rmlHash:
+          type: string
+          description: SHA-256 hash of the RML mapping.
+          readOnly: true
+      # TODO: Example
+    #      example:
+
+    RMLMapping:
+      type: object
+      description: An RML mapping with a CARML streaming source defined in it.
+      required:
+        - rml
+        - inputFormat
+        - outputFormat
+      properties:
+        name:
+          type: string
+          description: Optional, descriptive name of an RML mapping.
+        author:
+          type: string
+          description: Optional, descriptive name of the author of this RML mapping.
+        version:
+          type: string
+          description: Optional version identifier of this RML mapping.
+        description:
+          type: string
+          description: Optional free-text description of this RML mapping.
+        tags:
+          type: array
+          description: Optional array of tags for this RML mapping.
+          items:
+            type: string
+        inputFormat:
+          type: string
+          description: Format of input data for this RML mapping.
+          enum:
+            - JSON
+            - XML
+            - CSV
+        outputFormat:
+          type: string
+          description: Format of output data for this RML mapping.
+          enum:
+            - TTL
+            - RDFXML
+            - RDFJSON
+            - JSONLD
+            - N3
+        rml:
+          type: string
+          description: Contents of this RML mapping. It should be a serialization of a valid RML mapping with a CARML streaming source defined in it.
+      example:
+        name: "example mapping"
+        author: "anonymous"
+        version: "1.0dev"
+        description: "example mapping"
+        tags: ["example","geolocation"]
+        inputFormat: "JSON"
+        outputFormat: "TTL"
+        rml: |
+          @prefix rr: <http://www.w3.org/ns/r2rml#> .
+              @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+              @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+              @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+              @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+              @prefix map: <http://mapping.example.com/> .
+              @prefix ma: <http://www.w3.org/ns/ma-ont#> .
+              @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+              @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+              @prefix schema: <http://schema.org/> .
+              @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+              @prefix base: <http://example.com/ns#> .
+              @prefix carml: <http://carml.taxonic.com/carml/> .
+
+              map:rules_000 a <http://rdfs.org/ns/void#Dataset> ;
+                            <http://rdfs.org/ns/void#exampleResource> map:map_sensor_000 .
+
+              map:map_sensor_000 a rr:TriplesMap ;
+                                 rml:logicalSource[
+                                       a rml:LogicalSource  ;
+                                       rml:iterator "$" ;
+                                       rml:referenceFormulation ql:JSONPath ;
+                                       # rml:source "data.json" ;
+                                       rml:source [
+                                             a carml:Stream
+                                             # carml:streamName "my-named-stream" ;
+                                             ## Name is optional, but streams should be UNNAMED.
+                                             ## Otherwise there needs to be additional configuration that specifies, which streaming source to use.
+                                         ];
+                                   ] ;
+                                 rdfs:label "sensor" ;
+                                 rr:predicateObjectMap map:pom_000, map:pom_001, map:pom_002, map:pom_003 ;
+                                 rr:subjectMap [
+                                       a rr:SubjectMap ;
+                                       rr:template "http://loc.example.com/sensor/{id}"
+                                   ] .
+
+              map:pom_000 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rr:constant schema:Thing ;
+                                rr:termType rr:IRI
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant rdf:type
+                            ] .
+
+              map:pom_001 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "location.coordinates.latitude" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant wgs84_pos:lat
+                            ] .
+
+              map:pom_002 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "location.coordinates.longitude" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant wgs84_pos:long
+                            ] .
+
+              map:pom_003 a rr:PredicateObjectMap ;
+                          rr:objectMap [
+                                a rr:ObjectMap ;
+                                rml:reference "id" ;
+                                rr:termType rr:Literal
+                            ] ;
+                          rr:predicateMap [
+                                a rr:PredicateMap ;
+                                rr:constant schema:identifier
+                            ] .
+
+    ChannelStatus:
+      type: object
+      description: Information about the status of a streaming channel.
+      properties:
+        isStopped:
+          type: boolean
+          description: Is the channel stopped or active?
+        inputMonitorTopicEnabled:
+          type: boolean
+          description: Is the input monitoring topic on this channel enabled?
+        outputMonitorTopicEnabled:
+          type: boolean
+          description: Is the input monitoring topic on this channel enabled?
+        errorTopicEnabled:
+          type: boolean
+          description: Is the error topic on this channel enabled?
+        error:
+          type: string
+          readOnly: true
+          description: (optional) description of an error, that caused this channel to shut down.
+
+    TopicSettings:
+      type: object
+      description: |
+        Settings for a specific broker topic.
+        If broker type is "MQTT", then mqttSettings will be applied.
+        If broker type is "KAFKA", then kafkaSettings will be applied.
+        If no broker settings are provided, the defaults will be used.
+      required:
+        - topic
+        - brokerType
+      properties:
+        topic:
+          type: string
+          description: Name of broker topic.
+        brokerType:
+          $ref: '#/components/schemas/BrokerType'
+        kafkaSettings:
+          $ref: '#/components/schemas/KafkaSettings'
+        mqttSettings:
+          $ref: '#/components/schemas/MQTTSettings'
+      example:
+        topic: "input/myTopic"
+        brokerType: "MQTT"
+        mqttSettings:
+          protocol: "tcp"
+          host: "127.0.0.1"
+          port: 1883
+        # TODO: Why is this not rendered on the Swagger page? Are multiple examples not supported?
+    #      examples:
+    #        mqtt:
+    #          summary: mqtt topic settings
+    #          value:
+    #            topic: "input/myTopic"
+    #            brokerType: "MQTT"
+    #            mqttSettings:
+    #              protocol: "tcp"
+    #              host: "127.0.0.1"
+    #              port: 1883
+    #        kafka:
+    #          summary: kafka topic settings
+    #          value:
+    #            topic: "myInputTopic"
+    #            brokerType: "KAFKA"
+    #            kafkaSettings:
+    #              host: "127.0.0.1"
+    #              port: 9093
+
+    KafkaSettings:
+      type: object
+      description: Settings for a Kafka broker, with optional values.
+      required:
+        - host
+        - port
+      properties:
+        host:
+          type: string
+          description: IP address or domain of the host for this broker.
+        port:
+          type: integer
+          description: port number for this broker.
+        groupId:
+          type: string
+          description: Kafka group ID. If missing, a unique ID will be generated.
+      example:
+        host: "127.0.0.1"
+        port: 9093
+
+    MQTTSettings:
+      type: object
+      description: Settings for an MQTT broker, with optional values.
+      required:
+        - protocol
+        - host
+        - port
+      properties:
+        protocol:
+          type: string
+          description: Name of protocol for this broker.
+        host:
+          type: string
+          description: IP address or domain of the host for this broker.
+        port:
+          type: integer
+          description: port number for this broker.
+        clientId:
+          type: string
+        user:
+          type: string
+        password: string
+      example:
+        protocol: "tcp"
+        host: "127.0.0.1"
+        port: 1883
+
+    BrokerType:
+      type: string
+      description: Broker type.
+      enum:
+        - KAFKA
+        - MQTT
+      example: "MQTT"
+
+    VersionInfo:
+      type: object
+      description: Information about underlying software version.
+      properties:
+        name:
+          type: string
+          readOnly: true
+        version:
+          type: string
+          readOnly: true
+      example:
+        name: Seamann
+        version: 1.0
+
+    StatusInfo:
+      type: object
+      description: Information about initialization status.
+      required:
+        - status
+      properties:
+        status:
+          description: Initialization status
+          type: string
+          readOnly: true
+        error:
+          description: (optional) initialization error
+          type: string
+          readOnly: true
+      example:
+        status: INITIALIZED
+
+    SettingsInfo:
+      type: object
+      description: Information about default and current settings of the underlying software.
+      properties:
+        kafkaSettings:
+          $ref: '#/components/schemas/KafkaSettings'
+        mqttSettings:
+          $ref: '#/components/schemas/MQTTSettings'
+        maxShutdownDuration:
+          type: string
+          description: |
+            A text representation of a maximum time, that the backend will wait for all subsystems to shut down,
+            when a shutdown is initiated (e.g. "30 seconds").
+        parallelism:
+          type: integer
+          description: |
+            Number of parallel threads per channel. If equal to 1, each channel will process messages sequentially.
+            Order of input messages will be preserved in any case.
+        bufferSize:
+          type: integer
+          description: |
+            Number of messages kept in the buffer, per channel, before backpressure is applied.
+#            logLevel:
+#              type: string
+#              description: Level of logging for which events are logged to the log file.
+        standaloneMode:
+          type: boolean
+          description: |
+            Signifies, whether this insance works in standalone mode, or not.
+            
+            In standalone mode, no database is used for persistence, and all channels will be shut down and deleted
+            on shutdown.
+            In persistence mode, channel state is stored in a database, and will be restored when restarting.
+            Switching standalone mode on and off again does not clear the data stored in the database.
+            
+            Annotations endpoints is not available in standalone mode, because storing and retrieving annotations
+            requires a database.
+        restoreChannelsStopped:
+          type: boolean
+          description: If not in standalone mode, this setting decides if channels that were running before shutdown will
+            be restarted, or not. If this setting is true (and not in standalone mode), channels will be restored in a stopped state.
+        mongoHost:
+          type: string
+          description: MongoDB database host for the database to store annotations and channel state. Not used in standalone mode.
+        mongoPort:
+          type: integer
+          description: MongoDB database port for the database to store annotations and channel state. Not used in standalone mode.
+        mqttClientIdPrefixes:
+          type: object
+          description: Prefixes used to generate MQTT client IDs for channels.
+          properties:
+            inputClientId:
+              type: string
+              description: Prefix for client ID for input topics.
+            outputClientId:
+              type: string
+              description: Prefix for client ID for output topics.
+            errorClientId:
+              type: string
+              description: Prefix for client ID for error topics.
+            mqttMonitorInputClientId:
+              type: string
+              description: Prefix for client ID for input monitoring topics.
+            mqttMonitorOutputClientId:
+              type: string
+              description: Prefix for client ID for output monitoring topics.
+
+  parameters:
+    ChannelId:
+      name: channelId
+      in: path
+      description: Channel ID
+      example: "test/input_test/output_MQTT_MQTT_01234567-abcd-0123-abcd-0123456789ab"
+      schema:
+        type: string
+
+    FilterAll:
+      name: all
+      in: query
+      description: Return all data, regardless of other filter parameters
+      schema:
+        type: boolean
+
+    FilterChannelStatus:
+      name: status
+      in: query
+      description: Include status data in the returned result
+      schema:
+        type: boolean
+
+    FilterChannelSettings:
+      name: settings
+      in: query
+      description: Include settings data in the returned result
+      schema:
+        type: boolean
+
+    FilterChannelMetadata:
+      name: metadata
+      in: query
+      description: Include metadata in the returned result, but without RML, unless the rml query parameter is present
+      schema:
+        type: boolean
+
+    FilterChannelRml:
+      name: rml
+      in: query
+      description: If metadata is returned, include RML in it
+      schema:
+        type: boolean
+
+    AnnotationId:
+      name: annotationId
+      in: path
+      description: Annotation ID
+      example: "0123456789abcdef01234567"
+      schema:
+        type: string
+
+    FilterAnnotationHeader:
+      name: header
+      in: query
+      description: Include metadata in the returned result, but without RML, unless the rml query parameter is present
+      schema:
+        type: boolean
+
+    FilterAnnotationRml:
+      name: rml
+      in: query
+      description: If metadata is returned, include RML in it
+      schema:
+        type: boolean
+
+# TODO: Describe responses
+  responses:
+    500Error:
+      description: Internal server error
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Description of an error
+
+
+    400Error:
+      description: Invalid request
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: |
+              Description of an error. If request content was malformed, this message will explain, which part of the request
+              content was wrong.
+
+    404NoSuchChannelError:
+      description: Channel with specified ID was not found
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Message explaining, why a channel was not found
+
+    404AnnotationsServiceNotAvailableError:
+      description: |
+        Annotations service is not avilable
+        (most probably, because the software was started in standalone mode - see settings endpoint)
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Message explaining, why a channel was not found
+
+    404NoAnnotationOrNotAvailableError:
+      description: |
+        Annotation with specified ID was not found, or annotations service is not available
+        (most probably, because the software was started in standalone mode - see settings endpoint)
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Message explaining, why an annotation was not found
+
+#        application/json:
+#          schema:
+#            type: object
+#            properties:
+#              message:
+#                type: string

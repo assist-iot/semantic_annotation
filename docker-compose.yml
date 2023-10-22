@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+
+# TODO: Improve security and use pass vaults
+
+  seamanstreamer_core:
+    image: seamanstreamer_core
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    environment:
+      SEAMAN_STANDALONE_MODE: false
+      SEAMAN_RESTORE_STOPPED: false
+      MONGO_HOST: mongodb
+      MONGO_PORT: 27017
+      MONGO_DATABASE: ${DB_DATABASE}
+      MONGO_USER: ${DB_USER}
+      MONGO_PASSWORD: ${DB_PASS}
+      SEAMAN_KAFKA_HOST: 127.0.0.1
+      SEAMAN_KAFKA_PORT: 9093
+      SEAMAN_MQTT_PROTOCOL: tcp
+      SEAMAN_MQTT_HOST: 127.0.0.1
+      SEAMAN_MQTT_PORT: 1883
+      SEAMAN_MQTT_INPUT_CLIENT_ID: semann/source
+      SEAMAN_MQTT_OUTPUT_CLIENT_ID: semann/sink
+      SEAMAN_MQTT_ERROR_CLIENT_ID: semann/error
+      SEAMAN_MQTT_MONITOR_INPUT_CLIENT_ID: semann/monitor/input
+      SEAMAN_MQTT_MONITOR_OUTPUT_CLIENT_ID: semann/monitor/output
+      SEAMAN_LOG_TO_FILE: false
+      SEAMAN_LOG_LEVEL: "INFO"
+    ports:
+      - ${SEAMAN_REST_PORT}:8080
+    volumes:
+      - seaman_log:/seamanstreamer_core/log
+
+  mongodb:
+    # image: mongo:latest
+    image: bitnami/mongodb:6.0.2
+    volumes:
+      - mongodb_data:/bitnami
+    # ports:
+    #   - 27017:27017
+    environment:
+      # - MONGODB_ADVERTISED_HOSTNAME=mongo
+      MONGODB_ROOT_USER: mongo_root
+      MONGODB_ROOT_PASSWORD: t6H8rxeVUXzPVKiEFqUW
+      ALLOW_EMPTY_PASSWORD: "false"
+      MONGODB_USERNAME: ${DB_USER}
+      MONGODB_DATABASE: ${DB_DATABASE}
+      MONGODB_PASSWORD: ${DB_PASS}
+
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    restart: always
+    ports:
+      - ${SEAMAN_MONGO_EXPRESS_PORT}:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USER}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASS}
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongo_root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: t6H8rxeVUXzPVKiEFqUW
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_OPTIONS_EDITORTHEME: midnight
+    depends_on:
+      - mongodb
+
+volumes:
+  seaman_log:
+  mongodb_data:
+    driver: local

@@ -1,0 +1,31 @@
+[{
+  "worker_id": 1,
+  "first_name": "Grzegorz",
+  "last_name": "Brzęczyszczykiewicz",
+  "company": "Chrzęszczyrzewoszyce Transport",
+  "responsible_hs_manager": 2,
+  "expiration_date_of_training": "2022-05-01",
+  "expiration_date_of_medical_tests": "2021-01-01",
+  "expiration_date_of_permissions": "2024-04-09"
+},
+  {
+    "worker_id": 2,
+    "first_name": "Piotr",
+    "last_name": "Sowiński",
+    "company": "IBSPAN",
+    "responsible_hs_manager": 1,
+    "expiration_date_of_training": "2023-04-01",
+    "expiration_date_of_medical_tests": "2024-04-10",
+    "expiration_date_of_permissions": "2023-06-29"
+  },
+  {
+    "worker_id": 3,
+    "first_name": "Trzymisław",
+    "last_name": "Wklepajło",
+    "company": "Chrzęszczyrzewoszyce Transport",
+    "responsible_hs_manager": 2,
+    "expiration_date_of_training": "2022-05-01",
+    "expiration_date_of_medical_tests": "2021-01-01",
+    "expiration_date_of_permissions": "2023-06-29"
+  }
+]

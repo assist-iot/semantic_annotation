@@ -1,0 +1,28 @@
+{
+    "identifier": "ibs_1",
+    "location": {
+        "latitude": 52.2455635,
+        "longitude": 20.9403853
+    },
+    "timestamp": "2022-10-24T13:26:06.448117",
+    "bar_trend": 236,
+    "barometer": 30.526,
+    "temp_in": 68.8,
+    "temp_out": 64.0,
+    "hum_in": 36,
+    "hum_out": 74,
+    "wind_speed": 1,
+    "wind_speed_10_min_avg": 3,
+    "wind_direction": 227,
+    "rain_rate": 0.0,
+    "uv": 6,
+    "solar_radiation": 151,
+    "storm_rain": 0.0,
+    "rain_day": 0.0,
+    "rain_month": 1.22,
+    "rain_year": 4.44,
+    "et_day": 0.025,
+    "et_month": 1.2,
+    "et_year": 6.61,
+    "version": "1.1.0"
+}
