@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  semann_streamer:
+  - apiVersion: v2
+    appVersion: "0.9"
+    created: "2023-11-28T11:28:11.431062178+01:00"
+    description: Semantic Annotation enabler - streaming
+    digest: d7891051f3c7afd957db01ce9629fbbbe44b0461a0e6384b911ab1fbb53686fb
+    name: semann_streamer
+    type: application
+    urls:
+    - semann_streamer-0.9.7.tgz
+    version: 0.9.7
+generated: "2023-11-28T11:28:11.430702867+01:00"
